@@ -7,8 +7,9 @@ export const useAnimatedScale = (scGap, delay) => {
     const [prev, setPrev] = useState(-1)
     return {
         scale,
-        start() {
+        start(newCurr) {
             if (!animated) {
+                setCurr(newCurr)
                 var currScale = scale
                 setAnimated(true)
                 const interval = setInterval(() => {
@@ -18,7 +19,7 @@ export const useAnimatedScale = (scGap, delay) => {
                         setScale(0)
                         setAnimated(false)
                         clearInterval(interval)
-                        setPrev(curr)
+                        setPrev(newCurr)
                     }
                 }, delay)
             }
@@ -39,6 +40,11 @@ export const useDimension = () => {
             window.onresize = () => {
                 setW(window.innerWidth)
                 setH(window.innerHeight)
+            }
+        },
+        disableResize() {
+            window.onresize = () => {
+                
             }
         }
     }

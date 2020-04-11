@@ -7,14 +7,15 @@ const colorStyle = (w, h, color, scale) => {
     const left = `${w /2 - parseFloat(width) / 2}px`
     const top = `${0.3 * h - parseFloat(height) / 2}px`
     const background = color
-    return {position, height, width, left, top, background}
+    const border = "2px solid gray"
+    return {position, height, width, left, top, border, background}
 }
 
 
-const ColorArea = ({w, h, curr, prev, scale}) => {
+const ColorArea = ({w, h, curr, colors, prev, scale}) => {
     return <div>
-        <div style = {colorStyle(w, h, prev, 1)}/>
-        <div style = {colorStyle(w, h, curr, scale)}/>
+        <div style = {colorStyle(w, h, colors[prev], 1)}/>
+        <div style = {colorStyle(w, h, colors[curr], scale)}/>
     </div>
 }
 
