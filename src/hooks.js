@@ -1,8 +1,10 @@
 import {useState} from 'react'
 
-export const useAnimatedScale = (scGap, delay, cb) => {
+export const useAnimatedScale = (scGap, delay) => {
     const [scale, setScale] = useState(0)
     const [animated, setAnimated] = useState(false)
+    const [curr, setCurr] = useState(-1)
+    const [prev, setPrev] = useState(-1)
     return {
         scale,
         start() {
@@ -16,11 +18,14 @@ export const useAnimatedScale = (scGap, delay, cb) => {
                         setScale(0)
                         setAnimated(false)
                         clearInterval(interval)
-                        cb()
+                        setPrev(curr)
                     }
                 }, delay)
             }
-        }
+        },
+        setCurr,
+        curr,
+        prev
     }
 }
 
